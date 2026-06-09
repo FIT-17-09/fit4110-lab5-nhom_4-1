@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="FIT4110_lab05_team_core" tests="5" time="0.105">
+  <testsuite name="00_Health / GET /health - service is alive" id="9cd4d7ed-c949-421b-b6a8-886538cce484" timestamp="2026-06-09T16:54:28.859Z" tests="2" failures="0" errors="0" time="0.066">
+    <testcase name="Status code is 200" time="0.066" classname="00HealthGetHealthServiceIsAlive"/>
+    <testcase name="Response has service status" time="0.066" classname="00HealthGetHealthServiceIsAlive"/>
+  </testsuite>
+  <testsuite name="01_Functional / POST /evaluate - happy path creates evaluation" id="039df39b-8d2b-48cb-8118-c7b526778073" timestamp="2026-06-09T16:54:28.859Z" tests="2" failures="0" errors="0" time="0.022">
+    <testcase name="Status code is 201" time="0.022" classname="01FunctionalPostEvaluateHappyPathCreatesEvaluation"/>
+    <testcase name="Evaluation created fields" time="0.022" classname="01FunctionalPostEvaluateHappyPathCreatesEvaluation"/>
+  </testsuite>
+  <testsuite name="01_Functional / GET /evaluations - list records" id="580ad9f3-940a-469b-b209-d763361be6f0" timestamp="2026-06-09T16:54:28.859Z" tests="2" failures="0" errors="0" time="0.008">
+    <testcase name="Status code is 200" time="0.008" classname="01FunctionalGetEvaluationsListRecords"/>
+    <testcase name="Response contains items array" time="0.008" classname="01FunctionalGetEvaluationsListRecords"/>
+  </testsuite>
+  <testsuite name="02_Auth / POST /evaluate - missing token is rejected" id="e17a52bb-7693-49d2-bbc2-b187c58b21c9" timestamp="2026-06-09T16:54:28.859Z" tests="1" failures="0" errors="0" time="0.005">
+    <testcase name="Missing token returns 401" time="0.005" classname="02AuthPostEvaluateMissingTokenIsRejected"/>
+  </testsuite>
+  <testsuite name="03_Negative / POST /evaluate - missing payload returns error" id="04d72af7-f57a-4467-a183-2a3b8fcc0311" timestamp="2026-06-09T16:54:28.859Z" tests="1" failures="0" errors="0" time="0.004">
+    <testcase name="Invalid payload returns client error 400" time="0.004" classname="03NegativePostEvaluateMissingPayloadReturnsError"/>
+  </testsuite>
+</testsuites>

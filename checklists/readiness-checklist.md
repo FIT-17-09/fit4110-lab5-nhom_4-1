@@ -1,16 +1,26 @@
-# Readiness Checklist – Lab 05
+# Readiness Checklist - Nhóm 4-1
 
-Đây là danh sách kiểm tra (checklist) để đảm bảo stack Docker Compose của bạn đã sẵn sàng trước khi gửi bài. Hãy tick vào mỗi mục sau khi hoàn thành.
+Hệ thống được coi là sẵn sàng vận hành cho Plug-a-thon khi vượt qua đầy đủ 6 điểm kiểm định sau:
 
-- [ ] **Database ready:** container DB đã chạy và phản hồi `pg_isready`. Kiểm tra bằng `docker exec -it fit4110-db-lab05 pg_isready -U $POSTGRES_USER`.
-- [ ] **AI service ready:** container AI service trả về `200` cho endpoint `/health` và `/predict` hoạt động.
-- [ ] **API ready:** container API trả `200` cho `/health` và có thể tạo/lấy readings khi token hợp lệ.
-- [ ] **Environment variables:** `.env` đã được thiết lập đúng (APP_PORT, POSTGRES_USER, AUTH_TOKEN,…). Không sử dụng secret thật; lưu secret vào `.env` cục bộ, commit `.env.example`.
-- [ ] **Network & Ports:** mạng `team-internal` hoạt động; API gọi được AI bằng hostname `ai-service`; ports 8000 (API), 9000 (AI) và 5432 (DB) được map đúng.
-- [ ] **Image tags:** bạn đã build image với tag `v0.1.0-<team>` và push lên registry (ghcr.io hoặc Docker Hub). Xác nhận rằng tag xuất hiện trong registry.
+- [x] **1. Database Readiness (Cơ sở dữ liệu)**
+  - Lệnh `pg_isready` trong container `fit4110-db-lab05` xác nhận trạng thái sẵn sàng.
+  - Endpoint `/evaluations` truy vấn và lấy được dữ liệu thực tế từ các bảng trong DB.
 
-Ghi chú thêm những vấn đề gặp phải hoặc điều chỉnh tại đây:
+- [x] **2. AI Service Readiness (Dịch vụ AI)**
+  - Endpoint `/health` của `ai-service` trả về status `200 OK`.
+  - Phản hồi từ AI (dự đoán `alert`, độ tin cậy `0.92`) được tích hợp mượt mà.
 
-```
-- Mô tả…
-```
+- [x] **3. API Ingestion & Connection Readiness (Mạch kết nối)**
+  - API nhận dữ liệu từ Client, chuyển tiếp qua AI Service lấy kết quả, sau đó lưu toàn bộ vào DB mà không gặp lỗi cô lập kết nối.
+
+- [x] **4. Security & Environment Configuration (Biến môi trường & Bảo mật)**
+  - File `.env` được tách biệt hoàn toàn; không chứa credentials thật trong mã nguồn Git.
+  - Container chính (`api`) được cấu hình thực thi bằng tài khoản an toàn `non-root` (`user: "10001:10001"`).
+
+- [x] **5. Network Isolation (Cô lập mạng nội bộ)**
+  - Các service kết nối nội bộ khép kín thông qua mạng ảo định nghĩa riêng `team-internal`.
+  - Giữ nguyên cấu trúc phân tách cổng tường minh (API: `8000`, AI: `9000`, DB: `5432`).
+
+- [x] **6. Artifact and Version Registry Alignment (Định danh phiên bản)**
+  - Image được đóng gói và gán nhãn chính xác theo quy ước: `v0.1.0-team-4-1`.
+  - Sẵn sàng push bản build sạch lên Registry (Docker Hub/ghcr.io).
